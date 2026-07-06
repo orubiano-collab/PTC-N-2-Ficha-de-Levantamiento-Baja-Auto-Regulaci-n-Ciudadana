@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ficha PP2 · Baja Auto-Regulación Ciudadana · Rebolo 2026</title>
+<title>Ficha PTC2 · Baja Auto-Regulación Ciudadana · Rebolo 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400;1,800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -254,7 +254,7 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
     </div>
   </div>
   <div class="tb-pills">
-    <span class="pill pill-stl">Problema Público N° 2</span>
+    <span class="pill pill-stl">Problema Territorial Convivencia PTC N° 2</span>
     <span class="pill pill-gold">Auto-Regulación · Convivencia Ciudadana</span>
   </div>
 </div>
@@ -314,7 +314,7 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
 
     <form id="fichaForm">
     <input type="hidden" name="codigo_ficha" id="codigoFicha">
-    <input type="hidden" name="tipo_problema" value="PP2-AUTOREGULACION">
+    <input type="hidden" name="tipo_problema" value="PTC2-AUTOREGULACION">
 
     <!-- ══ SEC 1 ══ -->
     <div class="section vis" id="s0">
@@ -768,7 +768,7 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
 </div>
 
 <div class="footer">
-  <div><b>OSCC Barranquilla 2026</b> · Ficha PP2 · Baja Auto-Regulación Ciudadana</div>
+  <div><b>OSCC Barranquilla 2026</b> · Ficha PTC2 · Baja Auto-Regulación Ciudadana</div>
   <div>VIRTUS GLOBAL · Consultoría Fase 2 · Barrio Rebolo · Confidencial</div>
 </div>
 
@@ -961,7 +961,7 @@ function submitFicha(){
   const payload = recolectarDatosFormulario();
   payload.codigo_ficha = codigo;
   enviarABaseDeDatos(payload)
-    .then(() => console.log('✓ Ficha PP2 sincronizada con la base de datos'))
+    .then(() => console.log('✓ Ficha PTC2 sincronizada con la base de datos'))
     .catch(err => console.warn('⚠ No se pudo sincronizar con la base de datos (se guarda solo el código local):', err));
   document.getElementById('fichaFormContainer').style.display='none';
   const sc=document.getElementById('successScreen');
