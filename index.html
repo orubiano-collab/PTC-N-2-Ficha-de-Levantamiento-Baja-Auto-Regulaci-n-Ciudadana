@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ficha PTC2 · Baja Auto-Regulación Ciudadana · Rebolo 2026</title>
+<title>Ficha PTC2 · Baja Auto-Regulación Ciudadana · Rebolo · Gran Bazar · 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400;1,800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -263,14 +263,14 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <div class="prob-badge">Problema Público Priorizado · Barrio Rebolo · Diagnóstico Territorial</div>
+    <div class="prob-badge">Problema Público Priorizado · Barrios Rebolo & Gran Bazar · Diagnóstico Territorial</div>
     <h1>Ficha de Levantamiento:<br><em>Baja Auto-Regulación</em><br>Ciudadana</h1>
     <div class="prob-text">
       <strong>Problema Público:</strong> Bajos niveles de auto-regulación por parte de los ciudadanos respecto a sus comportamientos en el espacio público y en el ejercicio del desacuerdo con la institucionalidad, generando <strong>agresiones a funcionarios, bloqueos de operativos</strong> y normalización del incumplimiento normativo.
     </div>
     <div class="zones-row">
-      <div class="zone-chip"><div class="dot dot-red"></div> Barrio Rebolo</div>
-      <div class="zone-chip"><div class="dot dot-red"></div> Localidad Suroriente</div>
+      <div class="zone-chip"><div class="dot dot-red"></div> Barrio Rebolo · Suroriente</div>
+      <div class="zone-chip"><div class="dot dot-red"></div> Barrio Gran Bazar · Norte-Centro Histórico</div>
       <div class="zone-chip"><div class="dot dot-gold"></div> 5 manifestaciones a verificar</div>
       <div class="zone-chip"><div class="dot dot-gold"></div> Levantamiento en campo</div>
     </div>
@@ -343,19 +343,19 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
               </select>
             </div>
             <div class="fld">
-              <label class="lbl">Localidad</label>
-              <select name="localidad">
-                <option value="suroriente" selected>Suroriente</option>
-                <option>Norte-Centro Histórico</option>
-                <option>Sur Occidente</option>
-                <option>Riomar</option>
-                <option>Metropolitana</option>
+              <label class="lbl">Localidad <span class="req">*</span></label>
+              <select name="localidad" id="localidad" required onchange="actualizarBarrios()">
+                <option value="">— Seleccione la localidad —</option>
+                <option value="Suroriente">Suroriente (Rebolo)</option>
+                <option value="Norte-Centro Histórico">Norte-Centro Histórico (Gran Bazar)</option>
               </select>
             </div>
           </div>
           <div class="fld">
             <label class="lbl">Barrio / Sector específico <span class="req">*</span></label>
-            <input type="text" name="barrio_sector" value="Rebolo" required>
+            <select name="barrio_sector" id="barrio" required>
+              <option value="">— Primero seleccione la localidad —</option>
+            </select>
           </div>
           <div class="fld">
             <label class="lbl">Tipo de levantamiento</label>
@@ -769,10 +769,40 @@ select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.or
 
 <div class="footer">
   <div><b>OSCC Barranquilla 2026</b> · Ficha PTC2 · Baja Auto-Regulación Ciudadana</div>
-  <div>VIRTUS GLOBAL · Consultoría Fase 2 · Barrio Rebolo · Confidencial</div>
+  <div>VIRTUS GLOBAL · Consultoría Fase 2 · Barrios Rebolo & Gran Bazar · Confidencial</div>
 </div>
 
 <script>
+// ── CATÁLOGO TERRITORIAL REDUCIDO ──
+const catalogoTerritorial = {
+  "Suroriente": [
+    "Rebolo"
+  ],
+  "Norte-Centro Histórico": [
+    "Gran Bazar"
+  ]
+};
+
+function actualizarBarrios() {
+  const localidad = document.getElementById('localidad').value;
+  const barrioSelect = document.getElementById('barrio');
+  barrioSelect.innerHTML = '';
+  
+  if (!localidad || !catalogoTerritorial[localidad]) {
+    barrioSelect.innerHTML = '<option value="">— Primero seleccione la localidad —</option>';
+    return;
+  }
+  
+  const barrios = catalogoTerritorial[localidad];
+  barrioSelect.innerHTML = '<option value="">— Seleccione el barrio o sector —</option>';
+  barrios.forEach(barrio => {
+    const option = document.createElement('option');
+    option.value = barrio;
+    option.textContent = barrio;
+    barrioSelect.appendChild(option);
+  });
+}
+
 /* ── NAVEGACIÓN ── */
 const TOTAL_SEC = 5;
 let cur = 0;
@@ -1006,6 +1036,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const zone = document.getElementById(zoneId);
     if (zone) zone.addEventListener('click', () => inp.click());
   });
+  actualizarBarrios();
+  // Establecer fecha actual por defecto
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('input[name="fecha"]').value = today;
 });
 </script>
 </body>
